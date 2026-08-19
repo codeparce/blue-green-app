@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Code Parce</title>
+    <style>
+        :root {
+            --bg: #0b1b3a;
+            --surface: #152d5c;
+            --surface-strong: #0f234b;
+            --border: #1a3b70;
+            --accent: #2c6ced;
+            --accent-soft: #8aa8dc;
+            --text: #eef2fb;
+            --muted: #b9c4d9;
+            --shadow: 0 24px 80px rgba(4, 17, 40, 0.34);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            position: relative;
+            background: radial-gradient(circle at top, #112645 0%, #08172d 45%, #060d1c 100%);
+            color: var(--text);
+            font-family: "Google Sans", "Inter", "Segoe UI", sans-serif;
+            display: grid;
+            place-items: center;
+            padding: 3rem 1.5rem;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 8px rgba(44, 108, 217, 0.45);
+            opacity: 0.85;
+            animation: drift 14s linear infinite;
+        }
+
+        .star:nth-child(1) {
+            top: 12%;
+            left: 18%;
+            animation-duration: 14s;
+            animation-delay: -1s;
+        }
+
+        .star:nth-child(2) {
+            top: 35%;
+            left: 72%;
+            animation-duration: 12s;
+            animation-delay: -3s;
+            transform: scale(0.85);
+        }
+
+        .star:nth-child(3) {
+            top: 65%;
+            left: 24%;
+            animation-duration: 16s;
+            animation-delay: -5s;
+            transform: scale(1.1);
+        }
+
+        .star:nth-child(4) {
+            top: 22%;
+            left: 56%;
+            animation-duration: 10s;
+            animation-delay: -2s;
+            transform: scale(0.9);
+        }
+
+        .star:nth-child(5) {
+            top: 78%;
+            left: 42%;
+            animation-duration: 18s;
+            animation-delay: -7s;
+            transform: scale(0.75);
+        }
+
+        .star:nth-child(6) {
+            top: 48%;
+            left: 88%;
+            animation-duration: 15s;
+            animation-delay: -6s;
+            transform: scale(0.8);
+        }
+
+        .star:nth-child(7) {
+            top: 82%;
+            left: 16%;
+            animation-duration: 13s;
+            animation-delay: -4s;
+            transform: scale(1.05);
+        }
+
+        .star:nth-child(8) {
+            top: 54%;
+            left: 62%;
+            animation-duration: 17s;
+            animation-delay: -8s;
+            transform: scale(0.9);
+        }
+
+        .star:nth-child(9) {
+            top: 30%;
+            left: 34%;
+            animation-duration: 11s;
+            animation-delay: -9s;
+            transform: scale(0.7);
+        }
+
+        .star:nth-child(10) {
+            top: 10%;
+            left: 86%;
+            animation-duration: 19s;
+            animation-delay: -10s;
+            transform: scale(1.15);
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-18vw, -120vh) rotate(90deg);
+                opacity: 0.25;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 860px);
+            padding: 3rem;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(180deg, rgba(23, 42, 83, 0.98), rgba(15, 26, 56, 0.98));
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            display: block;
+            width: auto;
+            max-width: 100px;
+            margin-right: 2rem;
+            filter: drop-shadow(0 0 18px rgba(24, 108, 215, 0.45));
+        }
+
+        .code-frame {
+            position: relative;
+            padding: 2.5rem;
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(32, 52, 91, 0.96), rgba(18, 33, 67, 0.98));
+            border: 1px solid var(--border);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 28px 60px rgba(0, 0, 0, 0.24);
+            overflow: hidden;
+        }
+
+        .code-frame::before {
+            content: "";
+            position: absolute;
+            top: -16px;
+            right: -18px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(10, 94, 199, 0.22), transparent 66%);
+            filter: blur(18px);
+        }
+
+        .head {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+
+        }
+
+        .headline {
+            font-size: clamp(1.75rem, 2vw, 1rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #f4f7ff;
+            margin: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 44rem;
+            margin: 0 0 1.5rem;
+        }
+
+        .error-code {
+            font-size: 3rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent-soft);
+            margin-bottom: 1rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            align-items: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.95rem 1.3rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            background: rgba(44, 108, 217, 0.16);
+        }
+
+        @media (max-width: 680px) {
+            .container {
+                padding: 2rem;
+            }
+
+            .code-frame {
+                padding: 1.75rem;
+            }
+
+            .headline {
+                font-size: 0.35rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    <div class="">
+        <div class="code-frame">
+            <div class="head">
+                <img class="logo" src="logo figura.svg" alt="Code Parce logo">
+                <p class="error-code">Error 404</p>
+            </div>
+            <h5 class="headline">Página no encontrada</h5>
+            <p class="subhead">Lo sentimos, esta página no existe o no está disponible en este momento. Regresa al
+                inicio para continuar.</p>
+            <div class="buttons">
+                <a class="button" href="index.html">Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

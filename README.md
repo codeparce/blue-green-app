@@ -51,11 +51,11 @@ Tambien se pueden abrir estas direcciones en el navegador:
 ## Publicar las imagenes
 
 ```bash
-docker login
+docker login 
 
 docker tag blue-green-app:blue codeparce/blue-green-app:blue
 docker tag blue-green-app:green codeparce/blue-green-app:green
 
-docker push codeparce/blue-green-app:blue
-docker push codeparce/blue-green-app:green
-```
+docker push codeparce/blue-green-app:blue 
+docker push codeparce/blue-green-app:green 
+``` 

@@ -5,397 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Parce - Terminal Verde</title>
-    <style>
-        :root {
-            --bg: #05120c;
-            --surface: #0b1f13;
-            --surface-strong: #081b12;
-            --border: #124528;
-            --accent: #5cff7c;
-            --accent-soft: #8bf8a6;
-            --text: #c7f7cf;
-            --muted: #7fb58a;
-            --grey: #4c6a52;
-            --shadow: 0 24px 80px rgba(0, 30, 10, 0.4);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            min-height: 100vh;
-            position: relative;
-            background: radial-gradient(circle at top, #092317 0%, #051911 45%, #031208 100%);
-            color: var(--text);
-            font-family: "Google Sans", "Inter", "Segoe UI", sans-serif;
-            display: grid;
-            place-items: center;
-            padding: 3rem 1.5rem;
-            overflow: hidden;
-        }
-
-        .stars {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: rgba(156, 255, 143, 0.9);
-            box-shadow: 0 0 8px rgba(92, 255, 124, 0.45);
-            opacity: 0.85;
-            animation: drift 14s linear infinite;
-        }
-
-        .star:nth-child(1) {
-            top: 12%;
-            left: 18%;
-            animation-duration: 14s;
-            animation-delay: -1s;
-        }
-
-        .star:nth-child(2) {
-            top: 35%;
-            left: 72%;
-            animation-duration: 12s;
-            animation-delay: -3s;
-            transform: scale(0.85);
-        }
-
-        .star:nth-child(3) {
-            top: 65%;
-            left: 24%;
-            animation-duration: 16s;
-            animation-delay: -5s;
-            transform: scale(1.1);
-        }
-
-        .star:nth-child(4) {
-            top: 22%;
-            left: 56%;
-            animation-duration: 10s;
-            animation-delay: -2s;
-            transform: scale(0.9);
-        }
-
-        .star:nth-child(5) {
-            top: 78%;
-            left: 42%;
-            animation-duration: 18s;
-            animation-delay: -7s;
-            transform: scale(0.75);
-        }
-
-        .star:nth-child(6) {
-            top: 48%;
-            left: 88%;
-            animation-duration: 15s;
-            animation-delay: -6s;
-            transform: scale(0.8);
-        }
-
-        .star:nth-child(7) {
-            top: 82%;
-            left: 16%;
-            animation-duration: 13s;
-            animation-delay: -4s;
-            transform: scale(1.05);
-        }
-
-        .star:nth-child(8) {
-            top: 54%;
-            left: 62%;
-            animation-duration: 17s;
-            animation-delay: -8s;
-            transform: scale(0.9);
-        }
-
-        .star:nth-child(9) {
-            top: 30%;
-            left: 34%;
-            animation-duration: 11s;
-            animation-delay: -9s;
-            transform: scale(0.7);
-        }
-
-        .star:nth-child(10) {
-            top: 10%;
-            left: 86%;
-            animation-duration: 19s;
-            animation-delay: -10s;
-            transform: scale(1.15);
-        }
-
-        @keyframes drift {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translate(-18vw, -120vh) rotate(90deg);
-                opacity: 0.25;
-            }
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            width: min(100%, 860px);
-            padding: 3rem;
-            border-radius: 32px;
-            border: 1px solid rgba(156, 255, 143, 0.1);
-            background: linear-gradient(180deg, rgba(12, 39, 24, 0.98), rgba(6, 18, 12, 0.98));
-            box-shadow: var(--shadow);
-        }
-
-        .logo {
-            display: block;
-            width: 100px;
-            max-width: 100px;
-            margin: 0 auto 1.5rem;
-            filter: drop-shadow(0 0 18px rgba(92, 255, 124, 0.45));
-        }
-
-        .code-frame {
-            position: relative;
-            padding: 2.5rem;
-            border-radius: 28px;
-            background: linear-gradient(180deg, rgba(14, 45, 23, 0.96), rgba(9, 28, 16, 0.98));
-            border: 1px solid var(--border);
-            box-shadow: inset 0 0 0 1px rgba(156, 255, 143, 0.08), 0 28px 60px rgba(0, 0, 0, 0.24);
-            overflow: hidden;
-        }
-
-        .code-frame::before {
-            content: "";
-            position: absolute;
-            top: -16px;
-            right: -18px;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(92, 255, 124, 0.22), transparent 66%);
-            filter: blur(18px);
-        }
-
-        .head {
-            display: flex;
-        }
-
-        .headline {
-            font-size: clamp(2.75rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-            color: #e8ffe8;
-            max-width: 14ch;
-        }
-
-        .subhead {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--muted);
-            max-width: 44rem;
-            margin-bottom: 2rem;
-        }
-
-        .pulse {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 1.35rem;
-            border-radius: 999px;
-            border: 1px solid rgba(92, 255, 124, 0.35);
-            background: rgba(6, 19, 10, 0.92);
-            color: var(--text);
-            box-shadow: 0 14px 40px rgba(0, 17, 8, 0.28);
-            font-weight: 600;
-            letter-spacing: 0.01em;
-            width: fit-content;
-        }
-
-        .pulse span {
-            display: inline-block;
-            width: 0.85rem;
-            height: 0.85rem;
-            border-radius: 999px;
-            background: linear-gradient(180deg, #5cff7c, #8bf8a6);
-            box-shadow: 0 0 18px rgba(92, 255, 124, 0.5);
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(0.96);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: scale(1.08);
-                opacity: 1;
-            }
-        }
-
-        .social-links {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            border: 1px solid rgba(156, 255, 143, 0.15);
-            background: rgba(156, 255, 143, 0.08);
-            color: var(--text);
-            text-decoration: none;
-            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-2px);
-            background: rgba(92, 255, 124, 0.16);
-            box-shadow: 0 12px 30px rgba(9, 39, 18, 0.24);
-        }
-
-        .social-link svg {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
-        }
-
-        .footer {
-            margin-top: 1.75rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.85rem;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tab {
-            border: 0;
-            border-bottom: 2px solid transparent;
-            padding: 0.75rem 1rem;
-            background: transparent;
-            color: var(--muted);
-            cursor: pointer;
-            font: inherit;
-        }
-
-        .tab[aria-selected="true"] {
-            border-bottom-color: var(--accent);
-            color: var(--text);
-        }
-
-        .tab-panel[hidden] {
-            display: none;
-        }
-
-        .env-window {
-            margin-top: 1.5rem;
-            border: 1px solid var(--border);
-            background: rgba(4, 20, 11, 0.55);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .env-header {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 2.75rem;
-            border-bottom: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .window-controls {
-            position: absolute;
-            left: 1rem;
-            display: flex;
-            gap: 0.45rem;
-        }
-
-        .window-dot {
-            width: 0.7rem;
-            height: 0.7rem;
-            border-radius: 50%;
-        }
-
-        .window-dot.red {
-            background: #ff5f57;
-        }
-
-        .window-dot.yellow {
-            background: #febc2e;
-        }
-
-        .window-dot.green {
-            background: #28c840;
-        }
-
-        .env-filename {
-            color: var(--muted);
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-
-        .env-file {
-            overflow-x: auto;
-            margin: 0;
-            padding: 1.5rem;
-            color: var(--text);
-            font-family: monospace;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            white-space: pre;
-        }
-
-        .chip {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 999px;
-            padding: 0.75rem 1rem;
-            color: var(--muted);
-            font-size: 0.95rem;
-            backdrop-filter: blur(14px);
-        }
-
-        @media (max-width: 680px) {
-            .container {
-                padding: 2rem;
-            }
-
-            .code-frame {
-                padding: 1.75rem;
-            }
-
-            .headline {
-                font-size: 2.35rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -416,6 +26,7 @@
             <div class="tabs" role="tablist" aria-label="Contenido de la aplicación">
                 <button class="tab" id="home-tab" role="tab" aria-selected="true" aria-controls="home-panel">Inicio</button>
                 <button class="tab" id="details-tab" role="tab" aria-selected="false" aria-controls="details-panel">Detalles</button>
+                <button class="tab" id="request-tab" role="tab" aria-selected="false" aria-controls="request-panel">Petición HTTP</button>
             </div>
             <section id="home-panel" class="tab-panel" role="tabpanel" aria-labelledby="home-tab">
             <div class="head">
@@ -460,17 +71,41 @@ KUBERNETES_SERVICE_HOST=${KUBERNETES_SERVICE_HOST}
 BLUE_GREEN_APP_SVC_SERVICE_HOST=${BLUE_GREEN_APP_SVC_SERVICE_HOST}</code></pre>
                 </div>
             </section>
+            <section id="request-panel" class="tab-panel" role="tabpanel" aria-labelledby="request-tab" hidden>
+                <h2 class="headline">Petición HTTP</h2>
+                <p class="subhead">Envía una petición a otro servicio y consulta la respuesta.</p>
+                <form class="request-form" id="request-form">
+                    <div class="request-row">
+                        <div class="request-field">
+                            <label for="request-method">Método</label>
+                            <select id="request-method" name="method">
+                                <option>POST</option>
+                                <option>GET</option>
+                                <option>PUT</option>
+                                <option>PATCH</option>
+                                <option>DELETE</option>
+                            </select>
+                        </div>
+                        <div class="request-field">
+                            <label for="request-url">URL</label>
+                            <input id="request-url" name="url" type="url" placeholder="https://ejemplo.com/api" required
+                            value="http://blue-green-api.lab/health">
+                        </div>
+                    </div>
+                    <div class="request-field">
+                        <label for="request-body">Body (JSON)</label>
+                        <textarea id="request-body" name="body">{
+  "mensaje": "Hola desde Code Parce"
+}</textarea>
+                    </div>
+                    <button class="request-submit" type="submit">Enviar petición</button>
+                    <p class="request-status" id="request-status" role="status" aria-live="polite"></p>
+                    <pre class="request-response" id="request-response" aria-label="Respuesta del servicio">La respuesta aparecerá aquí.</pre>
+                </form>
+            </section>
         </div>
     </div>
-    <script>
-        const tabs = document.querySelectorAll("[role='tab']");
-        const panels = document.querySelectorAll("[role='tabpanel']");
-
-        tabs.forEach((tab) => tab.addEventListener("click", () => {
-            tabs.forEach((item) => item.setAttribute("aria-selected", item === tab));
-            panels.forEach((panel) => panel.hidden = panel.id !== tab.getAttribute("aria-controls"));
-        }));
-    </script>
+    <script src="app.js" defer></script>
 </body>
 
 </html>

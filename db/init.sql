@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS items (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    descrip TEXT NOT NULL,
+    monto NUMERIC(12, 2) NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

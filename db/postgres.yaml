@@ -3,6 +3,7 @@ kind: Namespace
 metadata:
   name: database
   labels:
+    istio-injection: enabled
     name: database
 ---
 apiVersion: apps/v1
@@ -82,7 +83,7 @@ spec:
   selector:
     app: postgres
   ports:
-    - name: http     
+    - name: tcp-postgres     
       port: 5432
       targetPort: 5432
 

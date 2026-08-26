@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import pg from "pg";
 
 const { Pool } = pg;
@@ -15,9 +16,18 @@ const pool = new Pool({
 });
 
 app.use(cors());
+app.use(morgan("combined"));
 app.use(express.json());
 
-app.get("/health", async (_request, response) => {
+app.get("/api", async (_request, response) => {
+    try {
+        response.json({ status: "ok", microservice: "activete" });
+    } catch {
+        response.status(503).json({ status: "error", database: "unavailable" });
+    }
+});
+
+app.get("/api/health", async (_request, response) => {
     try {
         await pool.query("SELECT 1");
         response.json({ status: "ok", database: "connected" });

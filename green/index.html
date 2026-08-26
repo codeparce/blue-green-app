@@ -94,9 +94,13 @@ BLUE_GREEN_APP_SVC_SERVICE_HOST=${BLUE_GREEN_APP_SVC_SERVICE_HOST}</code></pre>
                     </div>
                     <div class="request-field">
                         <label for="request-body">Body (JSON)</label>
-                        <textarea id="request-body" name="body">{
-  "mensaje": "Hola desde Code Parce"
-}</textarea>
+                       <textarea id="request-body" name="body">
+                            {
+                            "name": "test",
+                            "descrip": "Hola desde Code Parce",
+                            "monto": 10
+                            }
+                        </textarea>
                     </div>
                     <button class="request-submit" type="submit">Enviar petición</button>
                     <p class="request-status" id="request-status" role="status" aria-live="polite"></p>

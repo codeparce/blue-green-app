@@ -1,5 +1,7 @@
 # 📚 Diccionario de Flags de Trivy
 
+- [Documentacion](https://github.com/aquasecurity/trivy-action) 
+
 ```bash
 trivy fs -o report --scanners vuln,secret,misconfig -s HIGH,CRITICAL . 
 ```

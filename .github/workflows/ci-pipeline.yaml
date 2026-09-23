@@ -83,6 +83,7 @@ jobs:
         trivy-config: trivy/config/file.yaml
 
     - name: upload report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: report-trivy

@@ -57,7 +57,6 @@ jobs:
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: 'codeparce/blue-green-app:blue'
-          vuln-type: 'os,library'
           trivy-config: trivy/config/docker.yml
 
       - name: Push Docker image``

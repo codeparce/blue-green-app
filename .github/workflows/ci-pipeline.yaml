@@ -71,11 +71,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Download Trivy HTML template
-      run: |
-        mkdir -p contrib
-        wget https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -O contrib/html.tpl
-
     - name: Run Trivy vulnerability scanner in fs mode
       uses: aquasecurity/trivy-action@v0.36.0
       with:

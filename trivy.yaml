@@ -1,4 +1,4 @@
-format: json
+format: table #json
 exit-code: 1
 severity: CRITICAL
 # secret:

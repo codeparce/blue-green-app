@@ -1,0 +1,45 @@
+name: Trivy Scanner
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build-code:
+    runs-on: ubuntu-2404-2core
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up a fake environment
+        run: |
+          echo "Setting up a fake environment for testing purposes."
+          # Add any setup commands here
+
+      - name: upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-app
+          path: app/blue/
+          retention-days: 1
+
+  docker-image:
+    runs-on: ubuntu-2404-2core
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: download build
+        uses: actions/download-artifact@v4
+        with:
+          name: build-app
+          path: dist/
+
+      - name: verify files
+        run: |
+          ls -R dist/

@@ -2,8 +2,7 @@
 
 Aplicacion web estatica usada para demostrar un despliegue blue-green con Nginx.
 
-- `blue/`: version azul de la pagina.
-- `green/`: version verde de la pagina.
+- `app/`: version verde y azul de la pagina.
 - `api/`: API Express para listar e insertar datos.
 - `db/`: esquema y manifiesto de PostgreSQL para Kubernetes.
 - [api de ejemplo para hacer peticiones http](https://reqres.in/)
@@ -19,8 +18,8 @@ Aplicacion web estatica usada para demostrar un despliegue blue-green con Nginx.
 Desde la raiz del repositorio:
 
 ```bash
-docker build -t blue-green-app:blue ./blue
-docker build -t blue-green-app:green ./green
+docker build -t blue-green-app:blue ./app/blue
+docker build -t blue-green-app:green ./app/green
 docker build -t blue-green-app:api ./api
 ```
 

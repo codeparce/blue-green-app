@@ -1,6 +1,6 @@
 format: 'template' #json # table
+template: '@html.tpl'
+output: trivy-report.html
 scanners: 'vuln,secret,misconfig'
 exit-code: 1
-output: trivy-report.html
-template: '@contrib/html.tpl'
 severity: 'CRITICAL,HIGH'

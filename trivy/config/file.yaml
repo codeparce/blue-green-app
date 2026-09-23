@@ -1,5 +1,5 @@
 format: table #json
-scanners: 'vuln,secret,config'
+scanners: 'vuln,secret,misconfig'
 exit-code: 1
 severity: 'CRITICAL,HIGH'
 

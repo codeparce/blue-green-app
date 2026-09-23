@@ -3,7 +3,7 @@ exit-code: 1
 vuln-type: 'os,library'
 severity: 'CRITICAL,HIGH'
 scanners: 'vuln,secret'
-output: 'trivy-results.json' #<-reporte en json
+#output: 'trivy-results.json' #<-reporte en json
 
 ignore-unfixed: true # <- Oculta aquellas vulnerabilidades que todavía no tienen un parche
 

@@ -42,21 +42,44 @@ jobs:
           name: build-app
           path: dist/
 
-      - name: verify files
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.docker-account-name }}
+          password: ${{ secrets.docker-access-token }}
+
+      - name: Build Docker image
         run: |
-          ls -R dist/
+          docker build -t codeparce/blue-green-app:blue ./dist
+        shell: bash
 
-  check:
-    name: Check for Vulnerabilities
-    needs: [build-code]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: 'codeparce/blue-green-app:blue'
+          vuln-type: 'os,library'
+          trivy-config: trivy/config/docker.yml
 
-    - name: Run Trivy vulnerability scanner in fs mode
-      uses: aquasecurity/trivy-action@v0.36.0
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        trivy-config: trivy.yaml
+      - name: Push Docker image``
+        run: |
+          docker push codeparce/blue-green-app:blue
+        shell: bash
+
+  # check:
+  #   name: Check for Vulnerabilities
+  #   needs: [build-code]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+
+  #   - name: verify files
+  #     run: |
+  #       ls -lta 
+
+  #   - name: Run Trivy vulnerability scanner in fs mode
+  #     uses: aquasecurity/trivy-action@v0.36.0
+  #     with:
+  #       scan-type: 'fs'
+  #       scan-ref: '.'
+  #       trivy-config: trivy/config/file.yaml

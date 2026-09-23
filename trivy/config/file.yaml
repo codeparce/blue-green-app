@@ -1,6 +1,7 @@
 format: table #json
 scanners: 'vuln,secret,config'
 exit-code: 1
-severity: CRITICAL
+severity: 'CRITICAL,HIGH'
+
 # secret:
 #   config: config/trivy/secret.yaml

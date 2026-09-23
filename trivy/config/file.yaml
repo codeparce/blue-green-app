@@ -3,5 +3,6 @@ scanners: 'vuln,secret,config'
 exit-code: 1
 severity: 'CRITICAL,HIGH'
 
+
 # secret:
 #   config: config/trivy/secret.yaml
